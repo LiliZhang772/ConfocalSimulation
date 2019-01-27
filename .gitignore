@@ -1,2 +1,4 @@
 *.tif
 *.png
+Experiments/
+__pycache__/

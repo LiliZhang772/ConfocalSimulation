@@ -45,7 +45,17 @@ def createMobileImage(numpixel=100,pixelsize=0.1,tau=0.001,w0=0.3,N=10,D=1e-9,su
 
 def createStationaryImage(numpixel=100,pixelsize=0.1,w0=0.3,N=10):
     i_map = np.zeros((numpixel,numpixel)) #pixelmap/ image
-    i_list = i_map.flatten()    #flattened pixelmap (list of intensities)
+
+    '''
+    def gaussian(pos,w,amp=1):
+        xcent = 5 + pos[0] - int(pos[0])
+        ycent = 5 + pos[0] - int(pos[0])
+        gmap = np.zeros((numpixel,numpixel))
+        for i in range(len(gmap)):
+            for j in range(len(gmap[i])):
+                gmap[i,j] = amp * np.exp(0 - (xcent-j-5)**2/w[1]**2+(ycent-i-5)**2/w[0]**2)
+        return gmap
+    '''
 
     #track coordinates in um
     tracks = []
@@ -55,6 +65,7 @@ def createStationaryImage(numpixel=100,pixelsize=0.1,w0=0.3,N=10):
         #print(startpos)
         tracks.append(startpos)
 
+    i_list = i_map.flatten()    #flattened pixelmap (list of intensities)
     for t in range(len(i_list)):
         xcoord = (t % numpixel)
         ycoord = (t-xcoord)/numpixel * pixelsize
@@ -64,7 +75,7 @@ def createStationaryImage(numpixel=100,pixelsize=0.1,w0=0.3,N=10):
             i_list[t] += beamint(np.array([xcoord,ycoord]),track,w0=w0,amp=1)
 
     i_map = i_list.reshape((numpixel,numpixel))
-    #print(i_map)
+
     return i_map, tracks
 
 def createNoiseImage(numpixel=100,noise=10.):
@@ -72,22 +83,25 @@ def createNoiseImage(numpixel=100,noise=10.):
     return i_map
 
 
-if __name__=="__main__":
-    numpixel = 100
+def simulateConfocal(nmobile,nimmobile,fnoise,numpix=100,diffconst=1.0,width=0.3,noise=0.2,filename="confocalImage"):
+    numpixel = numpix
     pixelsize = 0.1 #um
     tau = 0.001 #s
-    w0 = 0.3 #um
-    Nmob = 5 #number of mobile particles
-    Nstat = 5 #number of stationary particles
-    Nnoise = 0.2 #noise amount
-    D = 0.7 #um^2/s
+    w0 = width #um
+    Nmob = nmobile #number of mobile particles
+    Nstat = nimmobile #number of stationary particles
+    Nnoise = noise #noise amount
+    D = diffconst #um^2/s
     subtau = 10
 
     cpp = 300 #kHz
     
     i_map_mob, tracks = createMobileImage(numpixel,pixelsize,tau,w0,Nmob,D,subtau)
     i_map_stat, parts = createStationaryImage(numpixel,pixelsize,w0,Nstat)
-    i_map_noise = createNoiseImage(numpixel,Nnoise)
+    if fnoise:
+        i_map_noise = createNoiseImage(numpixel,Nnoise)
+    else:
+        i_map_noise = np.zeros((numpixel,numpixel))
     
     i_map = i_map_mob + i_map_stat + i_map_noise
 
@@ -100,9 +114,14 @@ if __name__=="__main__":
 
     i_map = i_map.astype(np.uint16)
 
+    return i_map,tracks,parts
     
-    io.imsave("confocalImage.tif",i_map)
+def saveTIFF(i_map,filename):
+    io.imsave(filename+".tif",i_map)
+    return
     
+def savePlot(i_map,tracks,parts,pixelsize=0.1,filename="exampleImage"):
+    numpixel = len(i_map)
     fig1 = plt.figure(figsize=(12,7))
     ax1 = fig1.add_subplot(121)
     ax1.imshow(i_map)
@@ -126,6 +145,12 @@ if __name__=="__main__":
     ax2.set_xlabel(r"x [$\mu$m]")
     ax2.set_ylabel(r"y [$\mu$m]")
     ax2.legend(bbox_to_anchor=(0,0,1.0,-0.13),loc=2,ncol=2,borderaxespad=0.,mode='expand')
-    plt.savefig("confocalPlot.png",dpi=70)
-    plt.show()
+    plt.savefig(filename+".png",dpi=70)
+    #plt.show()
+    plt.close("all")
+    return
+
+if __name__=="__main__":
+    imap,tracks,parts = simulateConfocal(nmobile=0,nimmobile=3,fnoise=False)
+    savePlot(imap,tracks,parts)
 
