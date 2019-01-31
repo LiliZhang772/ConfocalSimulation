@@ -77,9 +77,9 @@ for samplenum in range(100):
 print("Noise")
 ofile.write("\n---Noise Particles---\n")
 ncounter = -1
+noise = np.arange(10)*0.05+0.05
 for samplenum in range(100):
     number = "{:06d}".format(samplenum+20000)
-    noise = np.arange(10)*0.05+0.05
 
     if samplenum % 10 == 0:
         ncounter += 1

@@ -78,7 +78,7 @@ def createStationaryImage(numpixel=100,pixelsize=0.1,w0=0.3,N=10):
 
     return i_map, tracks
 
-def createNoiseImage(numpixel=100,noise=10.):
+def createNoiseImage(numpixel=100,noise=1.):
     i_map = np.abs(np.random.normal(loc=0.1,scale=noise,size=[100,100]))
     return i_map
 
@@ -94,10 +94,14 @@ def simulateConfocal(nmobile,nimmobile,fnoise,numpix=100,diffconst=1.0,width=0.3
     D = diffconst #um^2/s
     subtau = 10
 
-    cpp = 300 #kHz
-    
+    cpp = 20 #kHz
+
+    #add mobile particles
     i_map_mob, tracks = createMobileImage(numpixel,pixelsize,tau,w0,Nmob,D,subtau)
+    #add immobile particles
     i_map_stat, parts = createStationaryImage(numpixel,pixelsize,w0,Nstat)
+
+    #add background noise
     if fnoise:
         i_map_noise = createNoiseImage(numpixel,Nnoise)
     else:
@@ -107,9 +111,8 @@ def simulateConfocal(nmobile,nimmobile,fnoise,numpix=100,diffconst=1.0,width=0.3
 
     i_map = i_map * cpp 
 
-    i_map[i_map > 0] += np.random.normal(loc=0.0,scale=np.sqrt(i_map[i_map > 0]))
+    i_map = np.random.poisson(i_map)
 
-    i_map[i_map < 0] = 0
     i_map[i_map >= 2**16] = 2**16 - 1
 
     i_map = i_map.astype(np.uint16)
