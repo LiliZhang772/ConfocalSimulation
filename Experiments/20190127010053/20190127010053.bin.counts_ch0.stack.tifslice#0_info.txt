@@ -1,0 +1,12 @@
+Directory: /media/markus/DEF256A2F2567EA9/Users/Markus/LittleHelpers/ConfocalSimulation/Experiments/20190127010053/
+First stack name: 20190127010053.bin.counts_ch0.stack.tif
+Second stack name: 20190127010053.bin.counts_ch1.stack.tif
+Stack size: 1
+Brightest Stack : 0
+Image width: 100
+Image height: 100
+Estimated noise: 0.06884474195638168
+Estimated noise in red image: 0.06884474195638168
+Pixel dwell time (ms): 1.0
+Pixel size (nm): 100.0
+CPP (kHz): 6.0

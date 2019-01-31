@@ -1,0 +1,2 @@
+ 	run	ROI	xpos	ypos	streak	spot
+1	2	39	24.469	16	1	0
