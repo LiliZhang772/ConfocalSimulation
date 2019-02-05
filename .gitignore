@@ -1,3 +1,9 @@
 *.tif
 *.png
 __pycache__/
+.spyproject/
+AnalysisImmobileCCR/
+AnalysisMobileRange/
+ExpCrossCorr-Particle-Noise/
+ExpMobileRange/
+Experiments/

@@ -1,1 +1,0 @@
-Directory: C:\Users\Markus\LittleHelpers\ConfocalSimulation\Experiments\20190127000042\, redtitle: 20190127000042.bin.counts_ch0.stack.tif
