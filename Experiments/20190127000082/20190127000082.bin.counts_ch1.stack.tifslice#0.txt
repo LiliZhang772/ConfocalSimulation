@@ -1,4 +1,0 @@
- 	ROI	z	a	stoichiometry	xpos	ypos	x0	y0	Chi^2	Good?	wx	wy	streak or spot?	Correlation Coefficient	free or bound?	iFirst	iSecond	pthresh	realthreshold	Above threshold?	Shape-Binding
-1	10	2.444	98.485	8.564	14.250	39.000	0.250	0.000	4.463	0	322.998	22.768	streak	1.013	bound	8.102	8.102	6.398	8.928	yes	streak-bound
-2	20	0.257	34.047	2.961	12.625	46.000	-0.375	0.000	0.732	1	496.033	22.768	streak	1.033	bound	3.714	3.714	5.849	8.268	yes	streak-bound
-3	25	2.923	22.490	1.956	76.312	24.344	0.312	0.344	4.341	0	493.144	136.197	streak	1.074	bound	4.776	4.776	5.771	8.173	yes	streak-bound

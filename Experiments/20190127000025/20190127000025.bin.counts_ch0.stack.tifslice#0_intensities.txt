@@ -1,3 +1,0 @@
- 	run1	ROI1	xpos1	ypos1	streak1	spot1	Corresponding ROI1	run2	ROI2	xpos2	ypos2	streak2	spot2	Corresponding ROI2
-1	1	14	11.891	34.766	0	0	14	2	14	11.891	34.766	0	0	14
-2	1	17	19.578	7.594	1	0	17	2	17	19.578	7.594	1	0	17
