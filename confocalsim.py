@@ -88,13 +88,12 @@ def createFullImageFromTracks(tracks_mobile,tracks_immobile, numpixel,pixelsize,
     return i_map
 
 #main function: create the full confocal image
-def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalImage"):
+def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalImage", cpp=10):
     pixelsize = 0.1 #um
     numpixel=100
     tau = 0.001 #s
     w0 = 0.3 #um
     subtau = 10
-    cpp = 20 #kHz
 
     #Build the particles:
     #create mobile tracks:
@@ -108,13 +107,15 @@ def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalIm
     saveTIFF(i_map,"single_TIFF")
     return 
 
-def simBoundDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], filenames=["CH0","CH1"]):
+def simBoundDualChannelConfocal(nmobile, nimmobile, diffconst, offset=0, filenames=["CH0","CH1"]):
     pixelsize = 0.1 #um
     numpixel=100
     tau = 0.001 #s
-    w0 = 0.3 #um
+    w0green = 0.32 #um
+    w0red = 0.37 #um
+    cppgreen = 20 #kHz * 1ms (pixel dwell time)
+    cppred = 20 #kHz * 1ms (pixel dwell time)
     subtau = 10
-    cpp = 20 #kHz
 
     if len(filenames) != 2:
         print("Must give 2 filenames")
@@ -126,60 +127,67 @@ def simBoundDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], fil
     #create stationary particles:
     ch0_tracks_immobile = makeTracks(nimmobile, 0, numpixel, pixelsize, tau, 1)
     #Make the images from tracks
-    ch0_i_map = createFullImageFromTracks(ch0_tracks_mobile,ch0_tracks_immobile,numpixel,pixelsize,w0,cpp)
+    ch0_i_map = createFullImageFromTracks(ch0_tracks_mobile,ch0_tracks_immobile,numpixel,pixelsize,w0green,cppgreen)
     #save the image and the track plot in a PNG
     savePlot(ch0_i_map,ch0_tracks_mobile,ch0_tracks_immobile,filename=filenames[0]+"_PLOT")
     saveTIFF(ch0_i_map,filenames[0])
     #offset mobile and immobile tracks by "offset"
     ch1_tracks_mobile = []
     for track in ch0_tracks_mobile:
-        saver1 = track[0] + offset[0]*pixelsize
-        saver2 = track[1] + offset[1]*pixelsize
+        rand_orientation = np.random.rand
+        randorient = np.random.uniform(low=-np.pi,high=np.pi)
+        randx = offset*np.cos(randorient)
+        randy = offset*np.sin(randorient)
+        saver1 = track[0] + randx*pixelsize
+        saver2 = track[1] + randy*pixelsize
         ch1_tracks_mobile.append(np.array([saver1,saver2]))
     ch1_tracks_immobile = []
     for track in ch0_tracks_immobile:
-        saver1 = track[0] + offset[0]*pixelsize
-        saver2 = track[1] + offset[1]*pixelsize
+        randorient = np.random.uniform(low=-np.pi,high=np.pi)
+        randx = offset*np.cos(randorient)
+        randy = offset*np.sin(randorient)
+        saver1 = track[0] + randx*pixelsize
+        saver2 = track[1] + randy*pixelsize
         ch1_tracks_immobile.append(np.array([saver1,saver2]))
     #Make the images from tracks
-    ch1_i_map = createFullImageFromTracks(ch1_tracks_mobile,ch1_tracks_immobile,numpixel,pixelsize,w0,cpp)
+    ch1_i_map = createFullImageFromTracks(ch1_tracks_mobile,ch1_tracks_immobile,numpixel,pixelsize,w0red,cppred)
     #save the image and the track plot in a PNG
     savePlot(ch1_i_map,ch1_tracks_mobile,ch1_tracks_immobile,filename=filenames[1]+"_PLOT")
     saveTIFF(ch1_i_map,filenames[1])
     
     return [ch0_i_map, ch1_i_map]
 
-def simFreeDualChannelConfocal(nmobile, nimmobile, diffconst, filenames=["CH0","CH1"]):
+def simFreeDualChannelConfocal(nmob, nimmob, diffconst, filenames=["CH0","CH1"],cpp=20):
     pixelsize = 0.1 #um
     numpixel=100
     tau = 0.001 #s
-    w0 = 0.3 #um
+    w0 = [0.32,0.37] #um
     subtau = 10
-    cpp = 20 #kHz
 
+    nmobile = nmob
+    nimmobile = nimmob
     i_maps = []
 
     for i in range(2):
         #Build the particles:
         #create mobile tracks:
-        tracks_mobile = makeTracks(nmobile, diffconst ,numpixel, pixelsize, tau, subtau)
+        tracks_mobile = makeTracks(nmobile[i], diffconst ,numpixel, pixelsize, tau, subtau)
         #create stationary particles:
-        tracks_immobile = makeTracks(nimmobile, 0, numpixel, pixelsize, tau, 1)
+        tracks_immobile = makeTracks(nimmobile[i], 0, numpixel, pixelsize, tau, 1)
         #Make the images from tracks
-        i_map = createFullImageFromTracks(tracks_mobile,tracks_immobile,numpixel,pixelsize,w0,cpp)
+        i_map = createFullImageFromTracks(tracks_mobile,tracks_immobile,numpixel,pixelsize,w0[i],cpp)
         #save the image and the track plot in a PNG
         savePlot(i_map,tracks_mobile,tracks_immobile,filename=filenames[i]+"_Plot".format(i))
         saveTIFF(i_map,filenames[i])
         i_maps.append(i_map)
     return i_maps
 
-def simParticleAndNoiseDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], filenames=["CH0","CH1"]):
+def simParticleAndNoiseDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], filenames=["CH0","CH1"],cpp=10):
     pixelsize = 0.1 #um
     numpixel=100
     tau = 0.001 #s
     w0 = 0.3 #um
     subtau = 10
-    cpp = 20 #kHz
 
     if len(filenames) != 2:
         print("Must give 2 filenames")
@@ -244,6 +252,6 @@ def savePlot(i_map,tracks,parts,pixelsize=0.1,filename="exampleImage"):
 
 if __name__=="__main__":
     print("Testing the simulation")
-    simSingleChannelConfocal(nmobile=10,nimmobile=10,diffconst=2.0)
-    simBoundDualChannelConfocal(nmobile=4,nimmobile=10,diffconst=2.0,offset=[10,0])
-    simFreeDualChannelConfocal(nmobile=0,nimmobile=10,diffconst=2.0)
+    simSingleChannelConfocal(nmobile=20,nimmobile=5,diffconst=2.0)
+    #simBoundDualChannelConfocal(nmobile=4,nimmobile=10,diffconst=2.0,offset=[10,0])
+    #simFreeDualChannelConfocal(nmobile=0,nimmobile=10,diffconst=2.0)

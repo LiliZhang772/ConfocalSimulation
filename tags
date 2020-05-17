@@ -1,0 +1,73 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+ax	chiDependence.py	/^ax = fig.add_subplot(111)$/;"	v
+beamint	confocalsim.py	/^def beamint(pos1,pos2,amp=1,w0=1):$/;"	f
+createFullImageFromTracks	confocalsim.py	/^def createFullImageFromTracks(tracks_mobile,tracks_immobile, numpixel,pixelsize,w0,cpp):$/;"	f
+createNoiseImage	confocalsim.py	/^def createNoiseImage(numpixel,stdNoise,avNoise=0):$/;"	f
+df	chiDependence.py	/^    df = df_raw[np.logical_and(df_raw["Good?"] == 1,df_raw["Above threshold?"] == "yes")]$/;"	v
+df_raw	chiDependence.py	/^    df_raw = pd.read_csv(elem+"\/SPOTS-ch0.csv")$/;"	v
+dirname	benchmarking.py	/^    dirname = time+number$/;"	v
+dirname	benchmarking2.py	/^    dirname = time+number$/;"	v
+dirname	benchmarking3.py	/^    dirname = time+number$/;"	v
+dirname	benchmarking4.py	/^    dirname = time+number$/;"	v
+dirname	benchmarkingParticleAndNoise.py	/^    dirname = time+number$/;"	v
+dirnames	chiDependence.py	/^dirnames = ["ExpSpotsRandomNoise","ExpSpotsRandomSpots","ExpStreaksRandomNoise","ExpStreaksRandomStreaks"]$/;"	v
+ending	benchmarking.py	/^        ending = ".bin.counts_ch{:01d}.stack".format(channelnum)$/;"	v
+ending	benchmarking2.py	/^        ending = ".bin.counts_ch{:01d}.stack".format(channelnum)$/;"	v
+ending	benchmarking3.py	/^        ending = ".bin.counts_ch{:01d}.stack".format(channelnum)$/;"	v
+ending	benchmarking4.py	/^        ending = ".bin.counts_ch{:01d}.stack".format(channelnum)$/;"	v
+ending	benchmarkingParticleAndNoise.py	/^        ending = ".bin.counts_ch{:01d}.stack".format(channelnum)$/;"	v
+expDir	benchmarking3.py	/^expDir = "ExpStreaksPositiveXCorr-X{:1d}".format(xoffset)$/;"	v
+expDir	benchmarking4.py	/^expDir = "ExpStreaksRandomStreaks"$/;"	v
+expDir	benchmarkingParticleAndNoise.py	/^expDir = "ExpSpotsRandomNoise"$/;"	v
+fig	chiDependence.py	/^fig = plt.figure()$/;"	v
+fnames	benchmarking3.py	/^    fnames = []$/;"	v
+fnames	benchmarking4.py	/^    fnames = []$/;"	v
+fnames	benchmarkingParticleAndNoise.py	/^    fnames = []$/;"	v
+giveBackground	measureBackground.py	/^def giveBackground(image):$/;"	f
+main	measureBackground.py	/^def main():$/;"	f
+makeIntensityMap	confocalsim.py	/^def makeIntensityMap(tracks, numpixel, pixelsize, width):$/;"	f
+makeTracks	confocalsim.py	/^def makeTracks(num_particles, diff_const, numpixel, pixelsize, tau, subtau):$/;"	f
+ncounter	benchmarking.py	/^ncounter = -1$/;"	v
+noise	benchmarking.py	/^noise = np.arange(10)*0.05+0.05$/;"	v
+number	benchmarking.py	/^    number = "{:06d}".format(samplenum+20000)$/;"	v
+number	benchmarking2.py	/^    number = "{:06d}".format(samplenum+60000)$/;"	v
+number	benchmarking3.py	/^    number = "{:06d}".format(samplenum+serialnum)$/;"	v
+number	benchmarking3.py	/^number = "{:06d}".format(serialnum)$/;"	v
+number	benchmarking4.py	/^    number = "{:06d}".format(samplenum+serialnum)$/;"	v
+number	benchmarking4.py	/^number = "{:06d}".format(serialnum)$/;"	v
+number	benchmarkingParticleAndNoise.py	/^    number = "{:06d}".format(samplenum+serialnum)$/;"	v
+number	benchmarkingParticleAndNoise.py	/^number = "{:06d}".format(serialnum)$/;"	v
+offsetBoxplot	chiDependence.py	/^def offsetBoxplot(filename,coordinate,zerocoordinate,particletype):$/;"	f
+offsetarray	chiDependence.py	/^offsetarray = []$/;"	v
+ofile	benchmarking.py	/^ofile = open("Logfile.log",'w')$/;"	v
+ofile	benchmarking2.py	/^ofile = open("Logfile.log",'w')$/;"	v
+ofile	benchmarking3.py	/^ofile = open("Logfile.log",'w')$/;"	v
+ofile	benchmarking4.py	/^ofile = open("Logfile.log",'w')$/;"	v
+ofile	benchmarkingParticleAndNoise.py	/^ofile = open("Logfile.log",'w')$/;"	v
+plotImages	measureBackground.py	/^def plotImages(img1,img2):$/;"	f
+savePlot	confocalsim.py	/^def savePlot(i_map,tracks,parts,pixelsize=0.1,filename="exampleImage"):$/;"	f
+saveTIFF	confocalsim.py	/^def saveTIFF(i_map,filename):$/;"	f
+serialnum	benchmarking3.py	/^serialnum = 14000$/;"	v
+serialnum	benchmarking4.py	/^serialnum = 15000$/;"	v
+serialnum	benchmarkingParticleAndNoise.py	/^serialnum = 15000$/;"	v
+simBoundDualChannelConfocal	confocalsim.py	/^def simBoundDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], filenames=["CH0","CH1"]):$/;"	f
+simFreeDualChannelConfocal	confocalsim.py	/^def simFreeDualChannelConfocal(nmobile, nimmobile, diffconst, filenames=["CH0","CH1"]):$/;"	f
+simParticleAndNoiseDualChannelConfocal	confocalsim.py	/^def simParticleAndNoiseDualChannelConfocal(nmobile, nimmobile, diffconst, offset=[0,0], filenames=["CH0","CH1"]):$/;"	f
+simSingleChannelConfocal	confocalsim.py	/^def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalImage"):$/;"	f
+time	benchmarking.py	/^time = dt.datetime.now().strftime("%Y%m%d")$/;"	v
+time	benchmarking2.py	/^time = dt.datetime.now().strftime("%Y%m%d")$/;"	v
+time	benchmarking3.py	/^time = dt.datetime.now().strftime("%Y%m%d")$/;"	v
+time	benchmarking4.py	/^time = dt.datetime.now().strftime("%Y%m%d")$/;"	v
+time	benchmarkingParticleAndNoise.py	/^time = dt.datetime.now().strftime("%Y%m%d")$/;"	v
+w	benchmarking2.py	/^    w = 0.2$/;"	v
+wcounter	benchmarking2.py	/^wcounter = -1$/;"	v
+widths	benchmarking2.py	/^widths = np.arange(10)*0.05 + 0.05$/;"	v
+workingDir	benchmarking3.py	/^workingDir = os.path.abspath('.')$/;"	v
+workingDir	benchmarking4.py	/^workingDir = os.path.abspath('.')$/;"	v
+workingDir	benchmarkingParticleAndNoise.py	/^workingDir = os.path.abspath('.')$/;"	v
+xoffset	benchmarking3.py	/^xoffset = 3$/;"	v
