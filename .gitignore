@@ -8,3 +8,4 @@ ExpCrossCorr-Particle-Noise/
 ExpMobileRange/
 Experiments/
 Exp*/
+.ipynb*
