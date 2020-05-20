@@ -88,9 +88,9 @@ def createFullImageFromTracks(tracks_mobile,tracks_immobile, numpixel,pixelsize,
     return i_map
 
 #main function: create the full confocal image
-def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalImage", cpp=10):
+def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalImage", cpp=20):
     pixelsize = 0.1 #um
-    numpixel=100
+    numpixel=20
     tau = 0.001 #s
     w0 = 0.3 #um
     subtau = 10
@@ -105,7 +105,7 @@ def simSingleChannelConfocal(nmobile, nimmobile, diffconst, filename="confocalIm
     #save the image and the track plot in a PNG
     savePlot(i_map,tracks_mobile,tracks_immobile)
     saveTIFF(i_map,"single_TIFF")
-    return 
+    return i_map
 
 def simBoundDualChannelConfocal(nmobile, nimmobile, diffconst, offset=0, filenames=["CH0","CH1"]):
     pixelsize = 0.1 #um
@@ -250,8 +250,22 @@ def savePlot(i_map,tracks,parts,pixelsize=0.1,filename="exampleImage"):
     plt.close("all")
     return
 
+def expandImage(smallimg):
+    largeimg = np.zeros(np.array(smallimg.shape)*10)
+    for i in range(smallimg.shape[0]):
+        for j in range(smallimg.shape[1]):
+            largeimg[i*10:(i+1)*10,j*10:(j+1)*10] = smallimg[i,j]
+    return largeimg
+
 if __name__=="__main__":
     print("Testing the simulation")
-    simSingleChannelConfocal(nmobile=20,nimmobile=5,diffconst=2.0)
+    img = simSingleChannelConfocal(nmobile=0,nimmobile=1,diffconst=2.0)
+
+    fig = plt.figure()
+    ax0 = fig.add_subplot(111)
+    ax0.imshow(expandImage(img))
+    fig.savefig("spot2.png")
+    plt.show()
+
     #simBoundDualChannelConfocal(nmobile=4,nimmobile=10,diffconst=2.0,offset=[10,0])
     #simFreeDualChannelConfocal(nmobile=0,nimmobile=10,diffconst=2.0)
